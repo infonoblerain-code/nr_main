@@ -1,0 +1,325 @@
+:root {
+  /* Colors — premium light theme */
+  --color-primary: #1a1a1a;
+  --color-secondary: #f4f4f4;
+  --color-accent: #c09f6e; /* A premium gold/bronze */
+  --color-text-main: #111111;
+  --color-text-muted: #666666;
+  --color-bg-main: #ffffff;
+  --color-bg-subtle: #f7f6f2;
+  --color-border: #e6e3da;
+  --color-success: #28a745;
+  --color-danger: #dc3545;
+  --color-primary-text: #ffffff;
+  --color-header-bg: #ffffff;
+  --color-header-text: #111111;
+
+  /* Typography */
+  --font-main: 'Inter', system-ui, -apple-system, sans-serif;
+  --font-heading: 'Outfit', 'Inter', sans-serif;
+
+  /* Spacing */
+  --spacing-xs: 0.5rem;
+  --spacing-sm: 1rem;
+  --spacing-md: 2rem;
+  --spacing-lg: 4rem;
+  --spacing-xl: 8rem;
+
+  /* Shadows & Radius */
+  --shadow-sm: 0 2px 4px rgba(0,0,0,0.05);
+  --shadow-md: 0 10px 20px rgba(0,0,0,0.08);
+  --shadow-hover: 0 15px 30px rgba(0,0,0,0.12);
+  --radius-sm: 4px;
+  --radius-md: 8px;
+  --radius-lg: 16px;
+
+  /* Transitions */
+  --transition-fast: 0.2s cubic-bezier(0.4, 0, 0.2, 1);
+  --transition-normal: 0.3s cubic-bezier(0.4, 0, 0.2, 1);
+  --transition-slow: 0.5s cubic-bezier(0.4, 0, 0.2, 1);
+}
+
+* {
+  box-sizing: border-box;
+  margin: 0;
+  padding: 0;
+}
+
+body {
+  font-family: var(--font-main);
+  background-color: var(--color-bg-main);
+  color: var(--color-text-main);
+  line-height: 1.6;
+  -webkit-font-smoothing: antialiased;
+}
+
+h1, h2, h3, h4, h5, h6 {
+  font-family: var(--font-heading);
+  font-weight: 600;
+  line-height: 1.2;
+}
+
+a {
+  text-decoration: none;
+  color: inherit;
+  transition: color var(--transition-fast);
+}
+
+a:hover {
+  color: var(--color-accent);
+}
+
+ul {
+  list-style: none;
+}
+
+button {
+  cursor: pointer;
+  border: none;
+  background: none;
+  font-family: var(--font-main);
+}
+
+/* Base Classes */
+.container {
+  max-width: 1200px;
+  margin: 0 auto;
+  padding: 0 var(--spacing-sm);
+}
+
+/* Wider than .container (which the grid, capped at 3 columns, doesn't need
+   the full 1600px+ for) but still centered - the sidebar should sit right
+   next to the product cards, not pinned to the raw browser edge. */
+.container-wide {
+  max-width: 1400px;
+  margin: 0 auto;
+  padding: 0 var(--spacing-sm);
+}
+
+.btn {
+  display: inline-block;
+  padding: 0.8rem 1.5rem;
+  border-radius: var(--radius-sm);
+  font-weight: 500;
+  text-align: center;
+  transition: filter 0.3s ease, background-color 0.3s ease, color 0.3s ease;
+}
+
+.btn-primary {
+  background-color: var(--color-accent);
+  color: #ffffff;
+}
+
+.btn-primary:hover, .btn-primary:active {
+  filter: brightness(0.85);
+  color: #ffffff;
+}
+
+.btn-outline {
+  border: none;
+  background-color: var(--color-bg-subtle);
+  color: var(--color-text-main);
+}
+
+.btn-outline:hover, .btn-outline:active {
+  filter: brightness(0.9);
+  color: var(--color-text-main);
+}
+
+/* Animations */
+@keyframes fadeIn {
+  from { opacity: 0; transform: translateY(10px); }
+  to { opacity: 1; transform: translateY(0); }
+}
+
+.animate-fade-in {
+  animation: fadeIn var(--transition-slow) forwards;
+}
+
+@keyframes shimmer {
+  0% { background-position: -1000px 0; }
+  100% { background-position: 1000px 0; }
+}
+.shimmer {
+  animation: shimmer 2.5s infinite linear;
+  background: linear-gradient(to right, #f4f4f4 8%, #e0e0e0 18%, #f4f4f4 33%);
+  background-size: 1000px 100%;
+}
+
+/* Forms */
+.input-group {
+  margin-bottom: var(--spacing-sm);
+}
+
+.input-group label {
+  display: block;
+  margin-bottom: 0.3rem;
+  font-size: 0.9rem;
+  color: var(--color-text-muted);
+}
+
+.input-group input,
+.input-group textarea,
+select {
+  box-sizing: border-box;
+  width: 100%;
+  padding: 0.8rem;
+  border: 1px solid var(--color-border);
+  border-radius: var(--radius-sm);
+  font-family: var(--font-main);
+  transition: border-color var(--transition-fast);
+  background-color: var(--color-bg-main);
+  color: var(--color-text-main);
+}
+
+.input-group input:focus,
+.input-group textarea:focus,
+select:focus {
+  outline: none;
+  border-color: var(--color-accent);
+}
+
+.flex-row-mobile-column {
+  display: flex;
+  gap: 1rem;
+}
+
+/* Catalog layout: filter sidebar on the left, products on the right */
+.shop-layout {
+  display: flex;
+  align-items: flex-start;
+  gap: 2.5rem;
+}
+
+.filter-sidebar {
+  display: flex;
+  width: 260px;
+  flex-shrink: 0;
+}
+
+.filter-sidebar input[type="checkbox"] {
+  accent-color: var(--color-accent);
+  width: 16px;
+  height: 16px;
+}
+
+.filter-toggle-btn {
+  display: none;
+}
+
+.shop-content {
+  flex: 1;
+  min-width: 0;
+}
+
+
+@media (max-width: 1024px) {
+  .video-hero {
+    height: 60vh !important;
+  }
+
+
+  .flex-row-mobile-column {
+    flex-direction: column;
+    gap: 1rem;
+  }
+  
+  header .container {
+    flex-direction: row !important;
+    flex-wrap: wrap !important;
+    gap: 0.4rem !important;
+  }
+
+  header nav {
+    flex-wrap: nowrap !important;
+    justify-content: flex-end;
+    gap: 0.5rem !important;
+  }
+
+  header nav > * {
+    margin-left: 0.8rem !important;
+    font-size: 0.9rem;
+  }
+
+  header {
+    padding: 0.5rem !important;
+  }
+
+  header .header-search-form {
+    order: 3;
+    flex: 1 1 100% !important;
+    max-width: 100% !important;
+    margin: 0.3rem 0 0 0 !important;
+  }
+
+  header .header-search-form input {
+    font-size: 16px !important;
+  }
+
+  .container,
+  .container-wide {
+    padding: 0 1rem;
+  }
+
+  .product-grid {
+    grid-template-columns: repeat(auto-fill, minmax(200px, 1fr)) !important;
+  }
+
+  .tableWrapper {
+    overflow-x: auto;
+  }
+
+  .cart-grid {
+    grid-template-columns: 1fr !important;
+    align-items: stretch !important;
+  }
+  
+  .checkout-grid {
+    display: flex !important;
+    flex-direction: column-reverse !important;
+    align-items: stretch !important;
+    gap: 2rem !important;
+  }
+
+  footer .container > div:first-child {
+    grid-template-columns: 1fr 1fr !important;
+    gap: 2rem !important;
+  }
+
+  .product-detail-grid {
+    grid-template-columns: 1fr !important;
+  }
+
+  .shop-layout {
+    flex-direction: column !important;
+    gap: 1rem !important;
+  }
+
+  .filter-sidebar {
+    display: none !important;
+    width: 100% !important;
+  }
+
+  .filter-sidebar.mobile-open {
+    display: flex !important;
+  }
+
+  .filter-toggle-btn {
+    display: inline-flex !important;
+  }
+
+  .modal-overlay {
+    padding: 1rem !important;
+  }
+
+  .modal-content {
+    padding: 1.5rem !important;
+  }
+}
+
+@media (max-width: 480px) {
+  .container,
+  .container-wide {
+    padding: 0 0.75rem;
+  }
+}
